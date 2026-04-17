@@ -1,5 +1,7 @@
 # pytest-req-traceability
 
+[![CI](https://github.com/pasrom/pytest-req-traceability/actions/workflows/ci.yml/badge.svg)](https://github.com/pasrom/pytest-req-traceability/actions/workflows/ci.yml)
+
 Minimal working example of marker-based requirement traceability in pytest.
 
 Shows how to link pytest tests to external requirement IDs (e.g. `REQ-101`)
@@ -75,6 +77,22 @@ def test_multiple_requirements():
 
 The hook does not change test discovery, collection, or execution. It's pure
 metadata extraction.
+
+## CI integration
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs pytest on every push
+and pull request. The workflow:
+
+1. Runs the test suite with `continue-on-error: true` so coverage is produced
+   even when tests fail.
+2. Prints the aggregated requirement coverage summary in the job log.
+3. Uploads `req_coverage.json` as a build artifact (visible in the Actions UI).
+4. Fails the job at the end if any test failed, while keeping the artifact
+   available.
+
+The example includes a deliberately failing test (`test_failing_example`) to
+demonstrate the pattern: the CI run goes red, but the coverage artifact still
+records which requirements were exercised and which tests passed.
 
 ## Pushing coverage to your issue tracker
 
