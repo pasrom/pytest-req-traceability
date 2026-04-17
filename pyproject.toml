@@ -1,0 +1,12 @@
+[project]
+name = "pytest-req-traceability"
+version = "0.1.0"
+description = "Minimal working example: pytest marker-based requirement traceability"
+requires-python = ">=3.10"
+dependencies = ["pytest>=7.0"]
+
+[tool.pytest.ini_options]
+markers = [
+    "requirement(*ids): Requirement IDs this test covers (e.g. REQ-101)",
+    "testcase(*ids): External test case IDs (e.g. TC-001)",
+]
